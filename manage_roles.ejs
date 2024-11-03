@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage User Roles</title>
+</head>
+<body>
+  <h2>Manage User Roles</h2>
+  <% if (error) { %>
+    <p style="color: red;"><%= error %></p>
+  <% } %>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Current Role</th>
+        <th>Change Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.username %></td>
+          <td><%= user.email %></td>
+          <td><%= user.role_name %></td>
+          <td>
+            <form action="/roles/change-role" method="POST">
+              <select name="role_id">
+                <% roles.forEach(role => { %>
+                  <option value="<%= role.id %>" <%= user.role_id === role.id ? 'selected' : '' %>><%= role.role_name %></option>
+                <% }) %>
+              </select>
+              <input type="hidden" name="user_id" value="<%= user.id %>">
+              <button type="submit">Change Role</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

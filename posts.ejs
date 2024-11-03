@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>All Posts</title>
+  </head>
+  <body>
+    <div class="posts-container">
+      <h2 class="posts-header">All Posts</h2>
+      <a href="/posts/create" class="create-post-link">Create New Post</a>
+      <a href="/auth/profile" class="profile-button">Back to home</a>
+
+      <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
+      <div class="post-item">
+        <h3 class="post-title">
+          <%= post.title %>
+          <small class="post-author">by <%= post.username %></small>
+        </h3>
+        <p class="post-content"><%= post.content %></p>
+        <p class="post-date">
+          <small>Created at: <%= post.created_at %></small>
+        </p>
+        <hr class="post-divider" />
+      </div>
+      <% }) %> <% } else { %>
+      <p class="no-posts-message">No posts available.</p>
+      <% } %>
+    </div>
+  </body>
+</html>

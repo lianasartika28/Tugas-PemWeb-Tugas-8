@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Available Rentals</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="rentals-container">
+      <h2>Available Rentals</h2>
+      <a href="/rentals/create" class="btn">Create New Rental</a>
+      <a href="/auth/profile" class="btn">Back to Profile</a>
+      <!-- New Button for Profile Page -->
+
+      <div class="rentals-list">
+        <% if (rentals.length > 0) { %> <% rentals.forEach(rental => { %>
+        <div class="rental-item">
+          <h3><%= rental.title %></h3>
+          <p><%= rental.description %></p>
+          <p>
+            Price: Rp <%= rental.price !== null && rental.price !== undefined ?
+            rental.price : 'N/A' %>
+          </p>
+          <p>Size: <%= rental.size %></p>
+          <p>Listed by: <%= rental.username || 'Unknown User' %></p>
+          <a href="/rentals/<%= rental.id %>" class="btn">View Details</a>
+        </div>
+        <% }); %> <% } else { %>
+        <p>No rentals available at the moment.</p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
